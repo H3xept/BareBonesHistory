@@ -1,2 +1,2 @@
-# BareBonesReadline
-A simpler implementation of GNU Readline
+# BareBonesHistory
+Bare bones history library implementation
