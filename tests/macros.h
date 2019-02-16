@@ -9,7 +9,7 @@
 
 #define _test_failed_ex_rec(line_n, expected, received) \
 	c_color(C_COLOR_CODE_Red);\
-	r_printf(" x - line: %d\n| Expected: %s\n| Received: %s\n", line_n, expected, received);\
+	printf(" x - line: %d\n| Expected: %s\n| Received: %s\n", line_n, expected, received);\
 	c_reset();\
 	errno = -1;
 

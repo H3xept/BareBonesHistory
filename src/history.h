@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 
+#define MAX_LINE_LEN 500
+
 // General
 void init_history();
 void import_history_from_file(char* filename);

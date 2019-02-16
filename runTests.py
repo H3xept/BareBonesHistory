@@ -23,12 +23,12 @@ def run_tests_for_file(filename):
 		testfile.write(generateMainFromStub(filename,functions))
 
 	print("Compiling...")
-	os.system(f"gcc -Idependencies -o run_test temp_test.c \
+	os.system(f"gcc -g -Idependencies -o run_test temp_test.c \
 		{filename[:-1]+'c'} $(find src/ -name '*.c' -a ! -name '*main.c') dependencies/libs/*.a")
 	print("Running...")
 	ret = os.system(f"./run_test")
 
-	os.system("rm run_test temp_test.c")
+	#os.system("rm run_test temp_test.c")
 
 	return ret
 
