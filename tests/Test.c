@@ -20,6 +20,7 @@ void test_add_and_read_entry(){
 }
 
 void test_add_and_read_multiple_entries(){
+	assert_true(0);
 	add_history_entry("test");
 	assert_eq_str(current_history_entry(), "test\n");
 	add_history_entry("hello");
