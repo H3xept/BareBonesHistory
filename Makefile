@@ -12,7 +12,7 @@ ANSI_IS_A_CURSE = ANSIsACurse
 ANSI_IS_A_CURSE_LOCATION = ../$(ANSI_IS_A_CURSE)
 ANSI_IS_A_CURSE_LOCATION_GIT = "https://github.com/H3xept/ANSIsACurse"
 
-all: target_dir prepare_dependencies compile_lib copy_headers
+all: target_dir prepare_dependencies test compile_lib copy_headers
 
 prepare_dependencies: 
 	@ echo "Preparing dependencies";

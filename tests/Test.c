@@ -14,7 +14,6 @@ void test_add_entry(){
 }
 
 void test_add_and_read_entry(){
-	assert_true(0);
 	add_history_entry("test");
 	assert_eq_str(current_history_entry(), "test\n");
 	clear_history();
