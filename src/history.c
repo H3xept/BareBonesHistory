@@ -17,6 +17,8 @@ static struct hist_entry* end;
 void _dealloc_entry(struct hist_entry* entry);
 int _ends_in_newline(char* string);
 
+// Public functions
+
 void init_history(){
 	start = NULL;
 	end = NULL;
@@ -64,12 +66,13 @@ char** get_entire_history(){
 	if(!length){
 		return NULL;
 	}
-	char** history_array = malloc(sizeof(char*) * length);
+	char** history_array = calloc(length + 1, sizeof(char*));
 	struct hist_entry* entry = start;
 	for(int i = 0; i < length; i++){
 		*(history_array + i) = entry->line;
 		entry = entry->next;
 	}
+	*(history_array + length) = NULL;
 	return history_array;
 }
 
@@ -140,6 +143,12 @@ char* latest_history_entry_containing(char* substring){
 	}while(entry);
 	return NULL;
 }
+
+unsigned int entries_n(){
+	return length;
+}
+
+// Private functions
 
 void _dealloc_entry(struct hist_entry* entry){
 	free(entry->line);

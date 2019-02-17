@@ -94,6 +94,22 @@ void test_history_IO(){
 	assert_eq_str(get_history_entry(3), "hello there\n");
 	assert_eq_str(get_history_entry(4), ":)\n");
 	assert_true(get_history_entry(5) == NULL);
+	clear_history();
+}
+
+void test_get_entire_history(){
+	add_history_entry("test");
+	add_history_entry("hello");
+	add_history_entry("rest");
+	add_history_entry("hello there");
+	add_history_entry(":)");
+	char** history_ptr = get_entire_history();
+	assert_eq_str(*history_ptr, "test\n");
+	assert_eq_str(*(history_ptr + 1), "hello\n");
+	assert_eq_str(*(history_ptr + 2), "rest\n");
+	assert_eq_str(*(history_ptr + 3), "hello there\n");
+	assert_eq_str(*(history_ptr + 4), ":)\n");
+	assert_true(*(history_ptr + 5) == NULL);
 }
 
 void teardown(){
