@@ -9,6 +9,7 @@
 #include <string.h>
 #include <signal.h>
 #include <errno.h>
+#include <sys/wait.h>
 
 #define EXPLANATION_SEPARATOR "-------------------"
 #define __explanation_separator() printf(EXPLANATION_SEPARATOR "\n")
