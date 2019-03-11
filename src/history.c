@@ -77,6 +77,8 @@ char** get_entire_history(){
 }
 
 void add_history_entry(char* line){
+	if (!line) { return; }
+	
 	char* nl_terminated = calloc(strlen(line)+1, sizeof(char));
 	if (!_ends_in_newline(line)) {
 		nl_terminated = realloc(nl_terminated, strlen(line)+2);
