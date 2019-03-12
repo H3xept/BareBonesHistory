@@ -32,6 +32,7 @@ void import_history_from_file(char* filename){
 	FILE* history_file = fopen(filename, "r");
 	char line[MAX_LINE_LEN];
 	while(fgets(line, MAX_LINE_LEN, history_file) != NULL){
+		line[strlen(line) - 1] = '\0';
 		add_history_entry(line);
 	}
 	fclose(history_file);
@@ -43,6 +44,7 @@ void export_history_to_file(char* filename){
 	struct hist_entry* current_entry = start;
 	while(current_entry){
 		strcat(lines, current_entry->line);
+		strcat(lines, "\n");
 		current_entry = current_entry->next;
 	}
 	fprintf(history_file, "%s", lines);
@@ -78,17 +80,10 @@ char** get_entire_history(){
 
 void add_history_entry(char* line){
 	if (!line) { return; }
-	
-	char* nl_terminated = calloc(strlen(line)+1, sizeof(char));
-	if (!_ends_in_newline(line)) {
-		nl_terminated = realloc(nl_terminated, strlen(line)+2);
-		strncpy(nl_terminated, line, strlen(line));
-		*(nl_terminated+strlen(nl_terminated)) = '\n';
-	} else {
-		strncpy(nl_terminated, line, strlen(line));
-	}
 	struct hist_entry* entry = calloc(1,sizeof(struct hist_entry));
-	entry->line = nl_terminated;
+	char* line_allocated = calloc(strlen(line) + 1, sizeof(char));
+	strcpy(line_allocated, line);
+	entry->line = line_allocated;
 	if(end){
 		end->next = entry;
 		entry->previous = end;
@@ -108,11 +103,11 @@ char* current_history_entry(){
 }
 
 char* get_history_entry(unsigned int index){
-	if(index >= length){
+	if(index > length || index < 1){
 		return NULL;
 	}
 	struct hist_entry* entry = start;
-	for(int i = 0; i < index; i++){
+	for(int i = 1; i < index; i++){
 		entry = entry->next;
 	}
 	return entry->line;
@@ -155,8 +150,4 @@ unsigned int entries_n(){
 void _dealloc_entry(struct hist_entry* entry){
 	free(entry->line);
 	free(entry);
-}
-
-int _ends_in_newline(char* string){
-	return *(string + strlen(string) - 1) == '\n';
 }
